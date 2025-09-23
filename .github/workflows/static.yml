@@ -1,0 +1,72 @@
+name: Deploy Static Site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # 触发部署的源分支
+  workflow_dispatch: # 支持手动触发
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      #- name: Set up Node.js
+      #  uses: actions/setup-node@v4
+      #  with:
+      #    node-version: '18'
+      #
+      # 可选：如果你需要构建（如使用 Vite、Webpack），取消注释以下步骤
+      # - name: Install dependencies
+      #   run: |
+      #     cd orba
+      #     npm install
+      #
+
+      # - name: Build static site
+      #   run: |
+      #     cd orba
+      #     npm run build  # 假设有 build 脚本
+
+      - name: Show orba content 📂
+        run: |
+          ls -R orba
+
+      - name: Copy orba to artifact dir 📤
+        run: |
+          mkdir -p ./dist
+          cp -r orba/* ./dist/
+          cp -r orba/.* ./dist/ 2>/dev/null || true  # 复制隐藏文件（如 .nojekyll）
+
+      - name: Setup Pages 🔧
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+
+
+
+
+
+
+

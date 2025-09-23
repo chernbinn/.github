@@ -3,6 +3,7 @@ name: Deploy Static Site to GitHub Pages
 on:
   push:
     branches: ["main"]
+  workflow_dispatch: # 支持手动触发
 
 permissions:
   contents: read
@@ -51,6 +52,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 600000  # 10分钟
 
 
 

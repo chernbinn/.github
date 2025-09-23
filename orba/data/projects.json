@@ -1,0 +1,13 @@
+[
+  {
+    "id": "project-a",
+    "name": "项目 A",
+    "desc": "这是一个用于演示的项目，支持多平台部署。",
+    "tech": "HTML, CSS, JS",
+    "links": {
+      "repo": "https://github.com/yourname/project-a",
+      "docs": "https://docs.project-a.example",
+      "download": "#"
+    }
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "general": [
+    {
+      "tier": "supporter",
+      "amount": 20,
+      "desc": "一杯咖啡的支持",
+      "alipay": "/images/qr-codes/general-supporter-alipay.png",
+      "wechat": "/images/qr-codes/general-supporter-wechat.png"
+    },
+    {
+      "tier": "backer",
+      "amount": 100,
+      "desc": "一顿午餐的支持",
+      "alipay": "/images/qr-codes/general-backer-alipay.png",
+      "wechat": "/images/qr-codes/general-backer-wechat.png"
+    }
+  ],
+  "projects": {
+    "project-a": [
+      {
+        "tier": "basic",
+        "amount": 10,
+        "desc": "基础支持",
+        "alipay": "/images/qr-codes/project-a-basic-alipay.png",
+        "wechat": "/images/qr-codes/project-a-basic-wechat.png"
+      }
+    ]
+  }
+}

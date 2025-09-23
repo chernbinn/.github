@@ -1,0 +1,50 @@
+name: Deploy Static Site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # 触发部署的源分支
+  workflow_dispatch: # 支持手动触发
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          path: ./
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      # 可选：如果你需要构建（如使用 Vite、Webpack），取消注释以下步骤
+      # - name: Install dependencies
+      #   run: |
+      #     cd orba
+      #     npm install
+      #
+      # - name: Build static site
+      #   run: |
+      #     cd orba
+      #     npm run build  # 假设有 build 脚本
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: orba  # 关键：指定部署目录为 orba
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v3

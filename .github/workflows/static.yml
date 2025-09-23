@@ -2,9 +2,7 @@ name: Deploy Static Site to GitHub Pages
 
 on:
   push:
-    branches:
-      - main  # 触发部署的源分支
-  workflow_dispatch: # 支持手动触发
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -13,7 +11,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: True
 
 jobs:
   deploy:
@@ -40,18 +38,6 @@ jobs:
       #   run: |
       #     cd orba
       #     npm run build  # 假设有 build 脚本
-
-      #- name: Show orba content 📂
-      #  run: |
-      #    ls -R orba
-      #
-      #- name: Copy orba to artifact dir 📤
-      #  run: |
-      #    mkdir -p ./dist
-      #    cp -r orba/* ./dist/
-      #    cp -r orba/.* ./dist/ 2>/dev/null || true
-      #    touch ./dist/.nojekyll
-
       - name: Setup Pages 🔧
         uses: actions/configure-pages@v5
 

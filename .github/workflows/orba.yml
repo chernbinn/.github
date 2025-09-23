@@ -24,9 +24,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          path: ./
-
       #- name: Set up Node.js
       #  uses: actions/setup-node@v4
       #  with:
@@ -44,6 +41,15 @@ jobs:
       #     cd orba
       #     npm run build  # 假设有 build 脚本
 
+      - name: Show orba content 📂
+        run: |
+          ls -R orba
+
+      - name: Copy orba to artifact dir 📤
+        run: |
+          mkdir -p ./dist
+          cp -r orba/* ./dist/
+          cp -r orba/.* ./dist/ 2>/dev/null || true  # 复制隐藏文件（如 .nojekyll）
 
       - name: Setup Pages 🔧
         uses: actions/configure-pages@v5
@@ -51,7 +57,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./orba  # 关键：指定部署目录为 orba
+          path: ./dist
 
       - name: Deploy to GitHub Pages
         id: deployment

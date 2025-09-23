@@ -20,6 +20,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Wait a moment ⏳
+        run: sleep 20
       - name: Checkout repository
         uses: actions/checkout@v4
       #- name: Set up Node.js

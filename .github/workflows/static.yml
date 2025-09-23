@@ -49,7 +49,8 @@ jobs:
         run: |
           mkdir -p ./dist
           cp -r orba/* ./dist/
-          cp -r orba/.* ./dist/ 2>/dev/null || true  # 复制隐藏文件（如 .nojekyll）
+          cp -r orba/.* ./dist/ 2>/dev/null || true
+          touch ./dist/.nojekyll
 
       - name: Setup Pages 🔧
         uses: actions/configure-pages@v5
